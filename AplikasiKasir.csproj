@@ -46,6 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DGVPrinter.cs" />
+    <Compile Include="FormMasterBarang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasterBarang.Designer.cs">
+      <DependentUpon>FormMasterBarang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMasterKasir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasterKasir.Designer.cs">
+      <DependentUpon>FormMasterKasir.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMenuUtama.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,10 +71,17 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Koneksi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMasterBarang.resx">
+      <DependentUpon>FormMasterBarang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMasterKasir.resx">
+      <DependentUpon>FormMasterKasir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenuUtama.resx">
       <DependentUpon>FormMenuUtama.cs</DependentUpon>

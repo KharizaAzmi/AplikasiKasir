@@ -7,11 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AplikasiKasir
 {
     public partial class FormLogin : Form
     {
+        private SqlCommand cmd;
+        private DataSet ds;
+        private SqlDataAdapter da;
+        private SqlDataReader rd;
+
+        Koneksi konn = new Koneksi();
+
         public FormLogin()
         {
             InitializeComponent();
@@ -34,7 +42,33 @@ namespace AplikasiKasir
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text == "ADM001" && textBox2.Text == "admin123")
+            SqlDataReader reader = null;
+            SqlConnection conn = konn.GetConn();
+            {
+                conn.Open();
+                cmd = new SqlCommand("select * from Tabel_Kasir where KodeKasir='"+ textBox1.Text + "' and PasswordKasir='"+ textBox2.Text + "'", conn);
+                cmd.ExecuteNonQuery();
+                reader = cmd.ExecuteReader();
+
+                if(reader.Read())
+                {
+                    FormMenuUtama.menu.loginToolStripMenuItem.Enabled = false;
+                    FormMenuUtama.menu.logoutToolStripMenuItem.Enabled = true;
+                    FormMenuUtama.menu.masterToolStripMenuItem.Enabled = true;
+                    FormMenuUtama.menu.transaksiToolStripMenuItem.Enabled = true;
+                    FormMenuUtama.menu.laporanToolStripMenuItem.Enabled = true;
+                    FormMenuUtama.menu.toolsToolStripMenuItem.Enabled = true;
+                    //FormMenuUtama formUtama = new FormMenuUtama();
+                    //formUtama.Show();
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Salah!");
+                }
+            }
+            /*if(textBox1.Text == "ADM001" && textBox2.Text == "admin123")
             {
                 FormMenuUtama formMenu = new FormMenuUtama();
                 formMenu.ShowDialog();
@@ -43,7 +77,12 @@ namespace AplikasiKasir
             else
             {
                 MessageBox.Show("username/password salah");
-            }
+            }*/
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            textBox2.PasswordChar = '*';
         }
     }
 }
